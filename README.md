@@ -1,36 +1,47 @@
 # Trabalho Prático 1 - Algoritmo do Banqueiro
+### Descrição 
+O Algoritmo do Banqueiro é usado para evitar deadlocks em sistemas que gerencia múltiplos recursos compartilhados entre vários processos (ou threads). Garantindo que o sistema só conceda recursos se após a concessão, assim permanecendo em um estado de segurança.
 
-Este projeto implementa o Algoritmo do Banqueiro utilizando múltiplas threads e controle de concorrência com mutexes.
+## Estruturas e Variáveis que utilizei 
+- NUMBER_OF_CUSTOMERS: número de clientes (threads).
+- NUMBER_OF_RESOURCES: número de tipos de recursos.
+- available[]: vetor com a quantidade disponível de cada recurso.
+- maximum[][]: matriz com o máximo de cada recurso que cada cliente pode pedir.
+- allocation[][]: matriz com a quantidade de cada recurso atualmente alocada para cada cliente.
+- need[][]: matriz com a quantidade de cada recurso que cada cliente ainda pode pedir (need = maximum - allocation).
+- lock: mutex para garantir que apenas uma thread manipule os recursos por vez.
 
-## 👨‍💻 Como Funciona
-
+## Funcinamento 
 Cada cliente (simulado por uma thread) realiza pedidos aleatórios de recursos, respeitando os limites definidos pelas suas necessidades máximas. O sistema verifica se conceder o pedido mantém o estado seguro. Se sim, o pedido é aceito; caso contrário, é negado.
 
-## 🔧 Requisitos
+##  Requisitos
 
-- GCC (compilador C)
-- Bibliotecas POSIX (pthreads)
+- GCC (compilador C) para Windows (ex: MinGW)
+- Windows (usa API de threads do Windows)
 
-## 🚀 Compilação
+##  Compilação
+
+No terminal, execute:
 
 ```
-gcc -o banqueiro main.c -lpthread
+gcc -o AlgoritmoBanqueiro AlgoritmoBanqueiro.c -lws2_32
 ```
 
-## 🧪 Execução
+##  Execução
 
 O programa espera que você passe os valores iniciais dos recursos como argumento:
 
 ```
-./banqueiro 10 5 7
+AlgoritmoBanqueiro.exe [numeros a sua escolha] [numeros a sua escolha] [numeros a sua escolha]
 ```
 
-Onde:
-- `10` = instâncias do recurso 0 disponíveis
-- `5` = instâncias do recurso 1 disponíveis
-- `7` = instâncias do recurso 2 disponíveis
+Ou, no terminal do VS Code:
 
-## 📝 O Que o Programa Faz
+```
+.\AlgoritmoBanqueiro.exe [numeros a sua escolha] [numeros a sua escolha] [numeros a sua escolha]
+```
+
+##  O Que o Programa Faz
 
 - Inicializa os recursos disponíveis com base nos argumentos
 - Gera aleatoriamente a matriz de necessidades máximas (`maximum`)
@@ -38,27 +49,24 @@ Onde:
   - Solicitam recursos com base nas suas necessidades (`need`)
   - Liberam recursos após um tempo
   - A cada ação, o estado do sistema é impresso
+- Cada cliente executa 5 ciclos de requisição/liberação e o programa termina automaticamente
 
-## 📘 Arquivos Importantes
+## Resumo visual 
+main()
+ └─ Cria threads clientes
+      └─ Cada cliente:
+           ├─ Gera pedido aleatório
+           ├─ request_resources()
+           │    └─ is_safe()
+           ├─ Usa recursos
+           ├─ release_resources()
+           └─ Repete ciclo 5 vezes
 
-- `main.c`: Código principal com o algoritmo do banqueiro e lógica das threads.
+##  Arquivos Importantes
 
-## 📚 Referência Teórica
+- `AlgoritmoBanqueiro.c`: Código principal com o algoritmo do banqueiro e lógica das threads.
+
+##  Referência Teórica
 
 - Dijkstra, E. W. (1965). "Banker's Algorithm" - prevenção de deadlock por verificação de estado seguro.
 - Silberschatz, A., Galvin, P. B., Gagne, G. (2021). *Operating System Concepts*. Wiley.
-
-## 📷 Exemplo de Saída
-```
-Cliente 2 obteve recursos.
-Available: 6 4 3
-...
-Cliente 2 liberou recursos.
-Available: 8 5 4
-...
-```
-
-## 👨‍🏫 Autor
-- Nome do Aluno
-- Engenharia da Computação
-- Universidade
