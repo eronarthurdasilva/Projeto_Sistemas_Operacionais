@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Users/erona/OneDrive/Área de Trabalho/Faculdade/ENGENHARIA DE COMPUTAÇÂO/Modulo 5/Sistemas Operacionais/Trabalhos/Trabalho 1",
+      "program": "c:/Users/erona/OneDrive/Área de Trabalho/Faculdade/ENGENHARIA DE COMPUTAÇÂO/Modulo 5/Sistemas Operacionais/Trabalhos/Trabalho 1/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
